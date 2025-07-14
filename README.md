@@ -61,3 +61,13 @@ Body
 - ssh -i "devtindersecret.pem" ubuntu@ec2-16-171-111-168.eu-north-1.compute.amazonaws.com
 - Install Node Version : 22.11.0
 - install the packages 
+
+- Frontend 
+    - npm install -> Dependencies Install 
+    - npm run build 
+    - sudo apt update : Retrieves the latest info about available software and updates.
+    - Nginx is a web server that can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache
+    - Start Nginx : sudo systemctl start nginx
+    - Start Nginx : sudo systemctl enable nginx
+
+
