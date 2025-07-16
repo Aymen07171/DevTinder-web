@@ -69,5 +69,61 @@ Body
     - Nginx is a web server that can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache
     - Start Nginx : sudo systemctl start nginx
     - Start Nginx : sudo systemctl enable nginx
+    - Check Nginx Version 
 
 
+- Backend 
+    - npm install -> Dependencies Install 
+    - Allow public ip address to access mongodb Network 
+    - Allow port access via E2C instance (security)
+    - Install PM2 to keep the backend code running behind the scenes 
+    - Start PM2 : pm2 start npm -- run dev
+    - Check PM2 logs if the application isn't working : pm2 logs 
+    - Clear Logs : pm2 flush logs
+    - Stop PM2 : PM2 stop
+
+- Nginx Configuration : 
+    - Configure the nginx server to behave as reverse proxy : 
+        - sudo nano /etc/nginx/sites-available/default
+        -  restart nginx : sudo systemctl restart nginx 
+
+                - Nginx Configuration : 
+            - Configure the nginx server to behave as reverse proxy : 
+                - sudo nano /etc/nginx/sites-available/default
+                -  restart nginx : sudo systemctl restart nginx 
+                - Modify the BASEURL in frontend project to /api
+
+                - server {
+                            listen 80;
+                            server_name your-domain.com; # or public EC2 IP
+
+                            # Proxy /api requests to Node.js
+                            location /api/ {
+                                proxy_pass http://localhost:7000/;
+                                proxy_http_version 1.1;
+
+                                proxy_set_header Host $host;
+                                proxy_set_header X-Real-IP $remote_addr;
+                                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                                proxy_set_header X-Forwarded-Proto $scheme;
+
+                                # Handle WebSocket upgrades (optional)
+                                proxy_set_header Upgrade $http_upgrade;
+                                proxy_set_header Connection "upgrade";
+                            }
+
+                            # Serve frontend or default page
+                            location / {
+                                root /var/www/html;
+                                index index.html index.htm;
+                            }
+                        }
+
+
+
+Frontend : http://16.171.111.168/
+Backend : http://16.171.111.168:3000/
+
+
+Frontend : devtinder.com 
+Backend : devtinder.com:3000  ==> devtinder.com/api
