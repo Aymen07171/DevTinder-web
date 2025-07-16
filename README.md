@@ -92,6 +92,8 @@ Body
                 - sudo nano /etc/nginx/sites-available/default
                 -  restart nginx : sudo systemctl restart nginx 
                 - Modify the BASEURL in frontend project to /api
+                - Check Nginx Status :  sudo systemctl status nginx
+
 
                 - server {
                             listen 80;
