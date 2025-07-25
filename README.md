@@ -82,49 +82,50 @@ Body
     - Clear Logs : pm2 flush logs
     - Stop PM2 : PM2 stop
 
-- Nginx Configuration : 
-    - Configure the nginx server to behave as reverse proxy : 
-        - sudo nano /etc/nginx/sites-available/default
-        -  restart nginx : sudo systemctl restart nginx 
 
-                - Nginx Configuration : 
-            - Configure the nginx server to behave as reverse proxy : 
-                - sudo nano /etc/nginx/sites-available/default
-                -  restart nginx : sudo systemctl restart nginx 
-                - Modify the BASEURL in frontend project to /api
-                - Check Nginx Status :  sudo systemctl status nginx
+2. Copy Frontend Build to Nginx Directory:
+
+# Remove default nginx content
+sudo rm -rf /var/www/html/*
+
+# Copy your built frontend
+sudo cp -r ~/DevTinder-web/dist/* /var/www/html/
+# OR if your build folder is called 'build':
+# sudo cp -r ~/DevTinder-web/build/* /var/www/html/
+
+# Set proper permissions
+sudo chown -R www-data:www-data /var/www/html
+sudo chmod -R 755 /var/www/html
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    server_name 54.196.224.91;
+    root /var/www/html;
+    index index.html index.htm;
+
+    # Serve API requests to Node.js backend
+    location /api/ {
+        proxy_pass http://localhost:3000/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+location / {
+        try_files $uri $uri/ /index.html;
+    }
 
 
-                - server {
-                            listen 80;
-                            server_name your-domain.com; # or public EC2 IP
-
-                            # Proxy /api requests to Node.js
-                            location /api/ {
-                                proxy_pass http://localhost:7000/;
-                                proxy_http_version 1.1;
-
-                                proxy_set_header Host $host;
-                                proxy_set_header X-Real-IP $remote_addr;
-                                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                                proxy_set_header X-Forwarded-Proto $scheme;
-
-                                # Handle WebSocket upgrades (optional)
-                                proxy_set_header Upgrade $http_upgrade;
-                                proxy_set_header Connection "upgrade";
-                            }
-
-                            # Serve frontend or default page
-                            location / {
-                                root /var/www/html;
-                                index index.html index.htm;
-                            }
-                        }
+}
 
 
-
-Frontend : http://16.171.111.168/
-Backend : http://16.171.111.168:3000/
 
 
 Frontend : devtinder.com 
