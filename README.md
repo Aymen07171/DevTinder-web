@@ -126,7 +126,60 @@ location / {
 }
 
 
-
-
 Frontend : devtinder.com 
 Backend : devtinder.com:3000  ==> devtinder.com/api
+
+
+
+
+# Adding a custom domain name 
+
+    - purchased domain name from Namecheap 
+    - Signup Cloudflare 
+    - Change the nameservers on Namecheap 
+    - wait for sometime till your nameserver are updated 
+    - Add DNS record : A devtinder.site 
+    - Enable SSL for website 
+
+
+# Sending Emails via SES 
+
+    - Create IAM user 
+    - Give Access to AmazonSESFull Access Management 
+    - Amazon SES : Create an Identity 
+    - Verify your domain name 
+    - Verify an email address 
+    - Install AWS SDK - V3 :   
+        - https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/ses#code-examples
+
+    - Set up SESClient
+    - Access Credentials should be create in IAM under securityCredentials Tab 
+    - Add the credentials to the env file 
+    - Write code for SESClient 
+    - Write code for sending email address 
+    - Make the email dyanmic by passing more params to the run function 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
