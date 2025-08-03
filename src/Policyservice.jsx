@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-const Policy = () => {
+const Policyservice = () => {
   return (
     <div className="max-w-4xl mx-auto p-6  bg-gray-800">
       <div className="mb-8">
@@ -148,4 +148,5 @@ const Policy = () => {
   );
 };
 
-export default Policy;
+
+export default Policyservice
