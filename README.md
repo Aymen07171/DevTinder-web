@@ -160,6 +160,10 @@ Backend : devtinder.com:3000  ==> devtinder.com/api
     - Make the email dyanmic by passing more params to the run function 
 
 
+# Razorpay Payment Gateway Integration 
+
+    - Signup on Razorpay & complete KYC 
+    - 
 
 
 

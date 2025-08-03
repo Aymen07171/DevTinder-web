@@ -8,6 +8,8 @@ import Feed from './Feed'
 import Profile from './Profile' // Import the Profile component
 import Request from '../src/Request' // Import the Request component
 import Connections from './Connections' // Import the Connections component
+import Policy from './policy'
+import Term from './Term'
 
 
 function App() {
@@ -28,6 +30,9 @@ function App() {
           <Route path='/connections' element={<Connections />} />
           <Route path='/requests' element={<Request />} />
           {/* Add more routes as needed */}
+          <Route path='/policy' element={<Policy />} />
+          <Route path='/terms' element={<Term />} />
+
           
           </Route>
 

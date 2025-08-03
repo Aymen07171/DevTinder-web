@@ -7,7 +7,14 @@ const Footer = () => {
         <p>
           Copyright © {new Date().getFullYear()} - All rights reserved by ACME Industries Ltd
         </p>
+        <p>
+          <a href="/policy" className="link link-hover">Privacy Policy</a>
+        </p>
+        <p>
+          <a href="/terms" className="link link-hover">Terms of Service</a>
+        </p>
       </aside>
+
     </footer>
   )
 }
