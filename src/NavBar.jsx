@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { BASE_URL } from './Utils/constants'
 import { removeUser } from './Utils/userSlice'
 
+
+
 // NavBar.jsx
 const NavBar = () => {
 
@@ -66,11 +68,21 @@ const user = Array.isArray(users) && users.length > 0 ? users[0] : null
                   <li>
                   <Link to="/requests">Connection Request</Link>
                 </li>
+                  <li>
+                  <Link to="/premium">Premuim</Link>
+                </li>
                 <li><a onClick={handleLogout}>Logout</a></li>
               </ul>
             </div>
           ) : (
+            <>
+            
             <a className="btn btn-primary" href="/login">Login</a>
+           <Link className="btn btn-primary" to="/premium">
+            Get Plus
+          </Link>
+            
+            </>
           )}
         </div>
       </div>

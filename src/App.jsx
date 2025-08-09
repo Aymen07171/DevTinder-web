@@ -10,6 +10,7 @@ import Request from '../src/Request' // Import the Request component
 import Connections from './Connections' // Import the Connections component
 import Term from './Term'
 import Policyservice from './Policyservice'
+import Premuim from './Premuim'
 
 
 function App() {
@@ -32,8 +33,7 @@ function App() {
           {/* Add more routes as needed */}
           <Route path='/policy' element={<Policyservice />} />
           <Route path='/terms' element={<Term />} />
-
-          
+          <Route path='/premium' element={<Premuim />} />
           </Route>
 
         </Routes>
